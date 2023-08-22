@@ -63,6 +63,8 @@
                 repoId = urlPath.substring(10)
                 repoType = 'dataset'
             }
+            var repoIdSplitArray = repoId.split('/')
+            repoId = repoIdSplitArray[0] + '/' + repoIdSplitArray[1]
             showToast("Forking, See more in your Colab!")
             var cmd = `!ait-fork --source_repo=${repoId} --hf_username=$HF_USERNAME --hf_token=$HF_TOKEN --repo_type=${repoType}`
             GM_setValue(listenerKey, cmd);
