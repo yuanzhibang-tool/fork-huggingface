@@ -86,7 +86,9 @@
                         var insertEditorIndex = editors.length - 1
                         var lastEditor = editors[insertEditorIndex]
                         lastEditor.setValue(newValue);
-                        document.querySelectorAll("colab-run-button")[insertEditorIndex].click()
+                        var allRunButtons = document.querySelectorAll("colab-run-button")
+                        var lastRunButton = allRunButtons[allRunButtons.length-1]
+                        lastRunButton.click()
                         GM_setValue(listenerKey, null);
                     });
                 } else {
