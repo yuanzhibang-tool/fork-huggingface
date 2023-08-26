@@ -17,6 +17,21 @@
 (function () {
     'use strict';
     var listenerKey = "fork_repo_cmd"
+    function addCopyButton() {
+        var cells = document.querySelectorAll('h4')
+        // Create a new button element
+        for (var i = 0; i < cells.length; i++) {
+            var h4 = cells[i]
+            h4.addEventListener('click', function (e) {
+                e.preventDefault();
+                showToast('Copied!');
+                // Copy the text inside the text field
+                navigator.clipboard.writeText(e.target.textContent);
+            });
+
+        }
+    }
+    addCopyButton()
     function showToast(message) {
         var toast = document.createElement('div');
         toast.textContent = message;
@@ -89,7 +104,7 @@
                         var lastEditor = editors[insertEditorIndex]
                         lastEditor.setValue(newValue);
                         var allRunButtons = document.querySelectorAll("colab-run-button")
-                        var lastRunButton = allRunButtons[allRunButtons.length-1]
+                        var lastRunButton = allRunButtons[allRunButtons.length - 1]
                         lastRunButton.click()
                         GM_setValue(listenerKey, null);
                     });
@@ -112,6 +127,7 @@
         if (cardName == 'Model card' || cardName == 'Dataset card') {
             addForkButton()
         } else {
+            addCopyButton()
         }
     }
 })();
